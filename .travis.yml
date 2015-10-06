@@ -6,10 +6,12 @@ php:
   - 5.6
   - 7
   - hhvm
+install:
+  - tools/composer.phar install
 script:
   - tools/phpunit.phar
 notifications:
   email:
-    recipients: [ fabrizio.branca@aoe.com ]
+    recipients: [ travis@fabrizio-branca.de ]
     on_success: always
     on_failure: always
