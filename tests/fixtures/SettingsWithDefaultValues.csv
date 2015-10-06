@@ -1,0 +1,7 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest
+Zettr\Handler\Magento\CoreConfigData,1,foo,bar,defaultvalue,
+Zettr\Handler\Magento\CoreConfigData,2,foo,bar,defaultvalue,,
+Zettr\Handler\Magento\CoreConfigData,3,foo,bar,defaultvalue,0,
+Zettr\Handler\Magento\CoreConfigData,4,foo,bar,defaultvalue, ,
+Zettr\Handler\Magento\CoreConfigData,5,foo,bar,,
+Zettr\Handler\Magento\CoreConfigData,6,foo,bar,defaultvalue,--empty--

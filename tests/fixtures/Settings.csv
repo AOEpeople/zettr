@@ -1,0 +1,9 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest,deploy,sandbox,staging,production
+,,,,,,,,,
+# Database parameters,,,,,,,,,
+Zettr\Handler\XmlFile,app/etc/local.xml,/config/global/resources/default_setup/connection/host,,localhost,latestdb,deploydb,,,
+,,,,,,,,,
+# Session parameters,,,,,,,,,
+,,,,,,,,,
+# Dev settings,,,,,,,,,
+Zettr\Handler\Magento\CoreConfigData,default,0,dev/debug/profiler,###ENV:DEBUG###,,0,0,,

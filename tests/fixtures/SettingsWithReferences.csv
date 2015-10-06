@@ -1,0 +1,2 @@
+Handler,Param1,Param2,Param3,environment_a,environment_b
+Zettr\Handler\Magento\CoreConfigData,p1,p2,p3,foo,###REF:environment_a###

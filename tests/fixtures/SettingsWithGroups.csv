@@ -1,0 +1,9 @@
+Handler,Param1,Param2,Param3,GROUPS,testenv
+Zettr\Handler\XmlFile,app/etc/local.xml,/a,,groupA,value
+Zettr\Handler\XmlFile,app/etc/local.xml,/b,,groupB,value
+Zettr\Handler\XmlFile,app/etc/local.xml,/c,,groupC,value
+Zettr\Handler\XmlFile,app/etc/local.xml,/a/b,,"groupA,groupB",value
+Zettr\Handler\XmlFile,app/etc/local.xml,/a/c,,"groupA,groupC",value
+Zettr\Handler\XmlFile,app/etc/local.xml,/b/c,,"groupB,groupC",value
+Zettr\Handler\XmlFile,app/etc/local.xml,/a/b/c,,"groupA,groupB,groupC",value
+Zettr\Handler\XmlFile,app/etc/local.xml,/nogroup,,,value

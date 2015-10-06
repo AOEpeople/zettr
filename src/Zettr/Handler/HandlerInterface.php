@@ -64,4 +64,6 @@ interface HandlerInterface {
 
     public function getStatus();
 
+    public function setIgnoreErrors($ignoreErrors);
+
 }

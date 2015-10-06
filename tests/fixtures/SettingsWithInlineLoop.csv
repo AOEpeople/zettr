@@ -1,0 +1,2 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest,deploy,sandbox,staging,production
+Zettr\Handler\Magento\CoreConfigData,param1,param2,a/b/{{c|d|e}},test,test2,0,0,,

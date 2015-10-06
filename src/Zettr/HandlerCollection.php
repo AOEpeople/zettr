@@ -27,7 +27,7 @@ class HandlerCollection implements \Iterator {
      */
     public function buildFromSettingsCSVFile($csvFile, $environment, $defaultEnvironment='DEFAULT', array $includeGroups=array(), array $excludeGroups=array()) {
         if (!is_file($csvFile)) {
-            throw new \Exception('SettingsFile is not present here: "'.$csvFile.'"');
+            throw new \Exception('File "'.$csvFile.'" not found.');
         }
         $fh = fopen($csvFile, 'r');
 
@@ -66,7 +66,7 @@ class HandlerCollection implements \Iterator {
             }
 
             if (!class_exists($handlerClassname) && strpos($handlerClassname, 'Est_Handler') === 0) {
-                $handlerClassname = str_replace('Est_Handler', '\\Zettr\Handler', $handlerClassname);
+                $handlerClassname = str_replace('Est_Handler', '\Zettr\Handler', $handlerClassname);
                 $handlerClassname = str_replace('_', '\\', $handlerClassname);
             }
 
@@ -100,9 +100,9 @@ class HandlerCollection implements \Iterator {
                 foreach ($values[2] as $param2) {
                     foreach ($values[3] as $param3) {
 
-                        $handler = new $handlerClassname(); /* @var $handler \Zettr\Handler\AbstractHandler */
-                        if (!$handler instanceof \Zettr\Handler\AbstractHandler) {
-                            throw new \Exception(sprintf('Handler of class "%s" is not an instance of \Zettr\Handler\AbstractHandler', $handlerClassname));
+                        $handler = new $handlerClassname(); /* @var $handler \Zettr\Handler\HandlerInterface */
+                        if (!$handler instanceof \Zettr\Handler\HandlerInterface) {
+                            throw new \Exception(sprintf('Handler of class "%s" does not implement \Zettr\Handler\HandlerInterface', $handlerClassname));
                         }
 
                         $handler->setParam1($param1);
@@ -267,7 +267,7 @@ class HandlerCollection implements \Iterator {
     public function addHandler(Handler\HandlerInterface $handler) {
         $hash = $this->getHandlerHash($handler);
         if (isset($this->handlers[$hash])) {
-            throw new \Exception('Handler with this specification already exists. Cannot add: ' . $handler->getLabel());
+            throw new \Exception('Handler with these parameters already exists. Cannot add: ' . $handler->getLabel());
         }
         $this->handlers[$hash] = $handler;
     }
@@ -279,7 +279,7 @@ class HandlerCollection implements \Iterator {
      * @param $p1
      * @param $p2
      * @param $p3
-     * @return Handler\HandlerInterface || bool
+     * @return Handler\HandlerInterface|bool
      */
     public function getHandler($handlerClassname, $p1, $p2, $p3) {
         if (isset($this->handlers[$this->getHandlerHashByValues($handlerClassname, $p1, $p2, $p3)])) {
@@ -317,28 +317,23 @@ class HandlerCollection implements \Iterator {
         return md5($handlerClassname.$p1.$p2.$p3);
     }
 
-    public function rewind()
-    {
+    public function rewind() {
         reset($this->handlers);
     }
 
-    public function current()
-    {
+    public function current() {
         return current($this->handlers);
     }
 
-    public function key()
-    {
+    public function key() {
         return key($this->handlers);
     }
 
-    public function next()
-    {
+    public function next() {
         return next($this->handlers);
     }
 
-    public function valid()
-    {
+    public function valid() {
         $key = key($this->handlers);
         $var = ($key !== NULL && $key !== FALSE);
         return $var;

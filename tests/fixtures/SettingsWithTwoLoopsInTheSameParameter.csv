@@ -1,0 +1,2 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest,deploy,sandbox,staging,production
+Zettr\Handler\Magento\CoreConfigData,test_{{store|website}}_{{a|b}},1,dev/debug/profiler,test,test2,0,0,,

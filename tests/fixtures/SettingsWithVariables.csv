@@ -1,0 +1,9 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest
+# Direct assignment of the variable
+Est_Handler_SetVar,var1,,,,value1,
+# Fallbacks also work with variables:
+Est_Handler_SetVar,var2,,,value2,,
+Zettr\Handler\Magento\CoreConfigData,2,foo,bar,,###VAR:var2###,
+Zettr\Handler\Magento\CoreConfigData,3,foo,bar,,###VAR:var1###,
+Zettr\Handler\Magento\CoreConfigData,4,foo,bar,,inline-###VAR:var1###-usage,
+Zettr\Handler\Magento\CoreConfigData,5,foo,bar,###VAR:var1###,,

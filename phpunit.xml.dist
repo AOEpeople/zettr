@@ -1,0 +1,17 @@
+<phpunit bootstrap="tests/phpunit.bootstrap.php"
+         colors="true"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         syntaxCheck="false"
+         stopOnFailure="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true">
+    <testsuite name="Zettr">
+        <directory suffix="Test.php">./src</directory>
+    </testsuite>
+    <php>
+        <ini name="memory_limit" value="-1" />
+        <ini name="max_execution_time" value="300" />
+    </php>
+</phpunit>

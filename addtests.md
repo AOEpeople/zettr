@@ -1,0 +1,6 @@
+- Different ways of specifying a handler
+  - test legacy Est_Handler
+  - Full class name 
+  - with and without leading \
+  - relative classname (without Zettr\Handler\)
+- error on different number of columns
