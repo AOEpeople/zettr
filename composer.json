@@ -1,0 +1,19 @@
+{
+  "name": "aoepeople/zettr",
+  "description": "Manage and apply settings (formerly known as EnvSettingsTool)",
+  "authors": [
+    {
+      "name": "Fabrizio Branca",
+      "email": "firstname.lastname@aoe.com"
+    }
+  ],
+  "require": {
+    "symfony/console": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src"
+    }
+  },
+  "bin": ["bin/zettr"]
+}
