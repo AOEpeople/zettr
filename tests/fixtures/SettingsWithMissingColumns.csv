@@ -1,0 +1,3 @@
+Handler,Param1,Param2,Param3,DEFAULT,latest,deploy,sandbox,staging,production
+Zettr\Handler\Magento\CoreConfigData,a,a,a,0,,,,,
+Zettr\Handler\Magento\CoreConfigData,b,b,b,0,,,

@@ -1,7 +1,7 @@
 Handler,Param1,Param2,Param3,DEFAULT,latest
-Zettr\Handler\Magento\CoreConfigData,1,foo,bar,,###PARAM1###,
-Zettr\Handler\Magento\CoreConfigData,2,foo,bar,,###PARAM2###,
-Zettr\Handler\Magento\CoreConfigData,3,foo,bar,,###PARAM3###,
-Zettr\Handler\Magento\CoreConfigData,4,foo,bar,,###ENVIRONMENT###,
-Zettr\Handler\Magento\CoreConfigData,5,foo,bar,###ENVIRONMENT###,,
-Zettr\Handler\Magento\CoreConfigData,6,foo,bar,,inline-###PARAM1###-parameter,
+Zettr\Handler\Magento\CoreConfigData,1,foo,bar,,###PARAM1###
+Zettr\Handler\Magento\CoreConfigData,2,foo,bar,,###PARAM2###
+Zettr\Handler\Magento\CoreConfigData,3,foo,bar,,###PARAM3###
+Zettr\Handler\Magento\CoreConfigData,4,foo,bar,,###ENVIRONMENT###
+Zettr\Handler\Magento\CoreConfigData,5,foo,bar,###ENVIRONMENT###,
+Zettr\Handler\Magento\CoreConfigData,6,foo,bar,,inline-###PARAM1###-parameter

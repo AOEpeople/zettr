@@ -66,4 +66,10 @@ interface HandlerInterface {
 
     public function setIgnoreErrors($ignoreErrors);
 
+    /**
+     * @return void
+     * @throws
+     */
+    public function check();
+
 }

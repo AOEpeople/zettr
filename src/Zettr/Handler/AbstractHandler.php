@@ -224,4 +224,16 @@ abstract class AbstractHandler implements HandlerInterface {
         $this->ignoreErrors = $ignoreErrors;
     }
 
+    /**
+     * @return boolean
+     */
+    public function check() {
+        // example:
+        //$exception = new \Zettr\Exception\HandlerCheckFailed('Invalid parameter');
+        //$exception->setHandler($this);
+        //throw $exception;
+
+        return true;
+    }
+
 }

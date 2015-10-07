@@ -2,7 +2,6 @@
 
 namespace Zettr;
 
-
 class HandlerCollectionTest extends \PHPUnit_Framework_TestCase {
 
 
@@ -384,5 +383,29 @@ class HandlerCollectionTest extends \PHPUnit_Framework_TestCase {
         return $handlerCollection;
     }
 
+    /**
+     * @test
+     */
+    public function specifyHandlernames() {
+        $handlerCollection = $this->getHandlerCollectionFromFixture('SettingsHandlernames.csv');
+        $handlers = array();
+        foreach ($handlerCollection as $handler) {
+            $handlers[] = $handler;
+        }
+
+        $this->assertCount(4, $handlers);
+
+        foreach ($handlers as $handler) { /* @var $handler Handler\HandlerInterface */
+            $this->assertInstanceOf('Zettr\Handler\Magento\CoreConfigData', $handler);
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function incorrectColumnCount() {
+        $this->setExpectedException('Exception', 'Incorrect column count in line 3 (got: 8, expected: 10)');
+        $handlerCollection = $this->getHandlerCollectionFromFixture('SettingsWithMissingColumns.csv');
+    }
 
 }

@@ -37,7 +37,12 @@ class HandlerCollection implements \Iterator {
             throw new \Exception('Error while reading labels from csv file');
         }
 
+        $line=1;
         while ($row = fgetcsv($fh)) {
+            $line++;
+            if (count($row) != count($this->labels)) {
+                throw new \Zettr\Exception\CheckFailed(sprintf('Incorrect column count in line %s (got: %s, expected: %s)', $line, count($row), count($this->labels)));
+            }
 
             $rowGroups = $this->getGroupsForRow($row);
 
@@ -66,12 +71,16 @@ class HandlerCollection implements \Iterator {
             }
 
             if (!class_exists($handlerClassname) && strpos($handlerClassname, 'Est_Handler') === 0) {
-                $handlerClassname = str_replace('Est_Handler', '\Zettr\Handler', $handlerClassname);
+                $handlerClassname = str_replace('Est_Handler', 'Zettr\\Handler', $handlerClassname);
                 $handlerClassname = str_replace('_', '\\', $handlerClassname);
             }
 
             if (!class_exists($handlerClassname)) {
-                throw new \Exception(sprintf('Could not find handler class "%s"', $handlerClassname));
+                $handlerClassname = 'Zettr\\Handler\\'.trim($handlerClassname, '\\');
+            }
+
+            if (!class_exists($handlerClassname)) {
+                throw new \Zettr\Exception\CheckFailed(sprintf('Could not find handler class "%s"', $handlerClassname));
             }
 
 
@@ -102,7 +111,7 @@ class HandlerCollection implements \Iterator {
 
                         $handler = new $handlerClassname(); /* @var $handler \Zettr\Handler\HandlerInterface */
                         if (!$handler instanceof \Zettr\Handler\HandlerInterface) {
-                            throw new \Exception(sprintf('Handler of class "%s" does not implement \Zettr\Handler\HandlerInterface', $handlerClassname));
+                            throw new \Zettr\Exception\CheckFailed(sprintf('Handler of class "%s" does not implement \\Zettr\\Handler\\HandlerInterface', $handlerClassname));
                         }
 
                         $handler->setParam1($param1);

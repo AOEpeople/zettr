@@ -43,7 +43,7 @@ class ApplyCommand extends Command
             )
             ->addArgument(
                 'file',
-                InputArgument::IS_ARRAY,
+                InputArgument::IS_ARRAY + InputArgument::REQUIRED,
                 'CSV file(s) to apply'
             );
     }
@@ -63,6 +63,7 @@ class ApplyCommand extends Command
             );
             $processor->setOutput($output);
             try {
+                $processor->check();
                 $processor->apply();
                 $processor->printResults();
             } catch (\Exception $e) {

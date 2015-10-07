@@ -17,7 +17,7 @@ class Processor {
     protected $settingsFilePath;
 
     /**
-     * @var array
+     * @var HandlerCollection
      */
     protected $handlerCollection;
 
@@ -67,10 +67,27 @@ class Processor {
         if ($excludeGroups) {
             $this->excludeGroups = Div::trimExplode(',', $excludeGroups, true);
         }
+
+        $this->handlerCollection->buildFromSettingsCSVFile(
+            $this->settingsFilePath,
+            $this->environment,
+            'DEFAULT',
+            $this->groups,
+            $this->excludeGroups
+        );
     }
 
     public function setOutput(\Symfony\Component\Console\Output\OutputInterface $output) {
         $this->output = $output;
+    }
+
+    /**
+     * @return bool
+     */
+    public function check() {
+        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\HandlerInterface */
+            $handler->check();
+        }
     }
 
     /**
@@ -80,13 +97,13 @@ class Processor {
      * @return bool
      */
     public function apply() {
-        $this->handlerCollection->buildFromSettingsCSVFile($this->settingsFilePath, $this->environment, 'DEFAULT', $this->groups, $this->excludeGroups);
-        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\AbstractHandler */
+        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\HandlerInterface */
             $res = $handler->apply();
             if (!$res) {
                 throw new \Exception('Error in handler: ' . $handler->getLabel());
             }
         }
+        DbConnection::commitAllTransactions();
         return true;
     }
 
@@ -97,8 +114,7 @@ class Processor {
      * @return bool
      */
     public function dryRun() {
-        $this->handlerCollection->buildFromSettingsCSVFile($this->settingsFilePath, $this->environment, 'DEFAULT', $this->groups, $this->excludeGroups);
-        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\AbstractHandler */
+        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\HandlerInterface */
             $this->output($handler->getLabel());
         }
         return true;
@@ -116,7 +132,6 @@ class Processor {
      * @return Handler\AbstractHandler
      */
     public function getHandler($handlerClassName, $param1, $param2, $param3) {
-        $this->handlerCollection->buildFromSettingsCSVFile($this->settingsFilePath,$this->environment);
         $handler = $this->handlerCollection->getHandler($handlerClassName, $param1, $param2, $param3);
         if ($handler === false) {
             throw new \Exception('No handler found with given specification: '."$handlerClassName, $param1, $param2, $param3");
@@ -129,7 +144,7 @@ class Processor {
      */
     public function printResults() {
         $statistics = array();
-        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\AbstractHandler */
+        foreach ($this->handlerCollection as $handler) { /* @var $handler Handler\HandlerInterface */
             // Collecting some statistics
             $statistics[$handler->getStatus()][] = $handler;
 

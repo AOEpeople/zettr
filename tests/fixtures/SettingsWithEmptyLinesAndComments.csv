@@ -1,12 +1,12 @@
 Handler,Param1,Param2,Param3,DEFAULT,latest
-# This is a comment,,,,,,
-,,,,,,
-Zettr\Handler\Magento\CoreConfigData,2,foo,bar,,test,
-Zettr\Handler\Magento\CoreConfigData,3,foo,bar,,test,
-,,,,,,
-,,,,,,
-Zettr\Handler\Magento\CoreConfigData,4,foo,bar,,test,
-Zettr\Handler\Magento\CoreConfigData,5,foo,bar,test,,
-# This is a comment,,,,,,
-# This is a comment,,,,,,
-Zettr\Handler\Magento\CoreConfigData,6,foo,bar,,test,
+# This is a comment,,,,,
+,,,,,
+Zettr\Handler\Magento\CoreConfigData,2,foo,bar,,test
+Zettr\Handler\Magento\CoreConfigData,3,foo,bar,,test
+,,,,,
+,,,,,
+Zettr\Handler\Magento\CoreConfigData,4,foo,bar,,test
+Zettr\Handler\Magento\CoreConfigData,5,foo,bar,test,
+# This is a comment,,,,,
+# This is a comment,,,,,
+Zettr\Handler\Magento\CoreConfigData,6,foo,bar,,test
