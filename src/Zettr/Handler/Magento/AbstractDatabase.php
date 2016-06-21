@@ -260,13 +260,13 @@ abstract class AbstractDatabase extends \Zettr\Handler\AbstractDatabase
      */
     protected function _processInsert($query, array $sqlParameters)
     {
-        $result = $this->getDbConnection()
-            ->prepare($query)
-            ->execute($sqlParameters);
+        $pdoStatement = $this->getDbConnection()->prepare($query);
+        $result       = $pdoStatement->execute($sqlParameters);
 
         if ($result === false) {
-            // TODO: include speaking error message
-            throw new \Exception('Error while updating value');
+            $info = $pdoStatement->errorInfo();
+            $code = $pdoStatement->errorCode();
+            throw new \Exception("Error while updating value (Info: $info, Code: $code)");
         }
 
         $this->addMessage(new Message(sprintf('Inserted new value "%s"', $this->value)));
@@ -286,8 +286,9 @@ abstract class AbstractDatabase extends \Zettr\Handler\AbstractDatabase
         $result       = $pdoStatement->execute($sqlParameters);
 
         if ($result === false) {
-            // TODO: include speaking error message
-            throw new \Exception('Error while updating value');
+            $info = $pdoStatement->errorInfo();
+            $code = $pdoStatement->errorCode();
+            throw new \Exception("Error while updating value (Info: $info, Code: $code)");
         }
 
         $rowCount = $pdoStatement->rowCount();
