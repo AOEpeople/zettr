@@ -100,3 +100,16 @@ How to
 - build the phar
 - import db first (chicken and egg problem)
 - run unit tests
+
+## Run phpunit
+
+```
+tools/phpunit.phar src/
+```
+ 
+### Create zettr.phar
+
+```
+tools/composer.phar install
+tools/box.phar build
+```
