@@ -113,3 +113,7 @@ tools/phpunit.phar src/
 tools/composer.phar install
 tools/box.phar build
 ```
+
+## License
+
+[GNU General Public License v3.0](http://choosealicense.com/licenses/gpl-3.0/)
