@@ -64,7 +64,11 @@ class ApplyCommand extends Command
             $processor->setOutput($output);
             try {
                 $processor->check();
-                $processor->apply();
+                if($input->getOption('dryRun')){
+                    $processor->dryRun();
+                } else {
+                    $processor->apply();
+                }
                 $processor->printResults();
             } catch (\Exception $e) {
                 $processor->printResults();
