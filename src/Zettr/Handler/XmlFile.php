@@ -62,13 +62,21 @@ class XmlFile extends AbstractHandler {
         }
 
         if ($elements->length == 0) {
-            $this->setStatus(HandlerInterface::STATUS_SUBJECTNOTFOUND);
-            throw new \Exception(sprintf('Xpath "%s" does not match any elements', $expression));
+            if ($this->value == '--delete--') {
+                $this->addMessage(new Message('No nodes detected.', Message::SKIPPED));
+            } else {
+                $this->setStatus(HandlerInterface::STATUS_SUBJECTNOTFOUND);
+                throw new \Exception(sprintf('Xpath "%s" does not match any elements', $expression));
+            }
         }
 
         $changes = 0;
         foreach ($elements as $element) { /* @var $element \DOMNode */
-            if ($element->nodeValue == $this->value) {
+            if ($this->value == '--delete--') {
+                $element->parentNode->removeChild($element);
+                $this->addMessage(new Message('Node removed'));
+                $changes++;
+            } elseif ($element->nodeValue == $this->value) {
                 $this->addMessage(new Message(sprintf('Value "%s" is already in place. Skipping.', $this->value), Message::SKIPPED));
             } else {
                 $this->addMessage(new Message(sprintf('Updated value from "%s" to "%s"', $element->nodeValue, $this->value)));
