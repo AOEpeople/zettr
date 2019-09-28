@@ -38,7 +38,7 @@ abstract class AbstractDatabase extends \Zettr\Handler\AbstractDatabase
     protected function _getDatabaseConnectionParameters()
     {
         $localXmlFile = 'app/etc/local.xml';
-        $configPhpFile = 'app/etc/config.php';
+        $configPhpFile = 'app/etc/env.php';
 
         if (is_file($localXmlFile)) {
             $config = simplexml_load_file($localXmlFile);
