@@ -326,23 +326,23 @@ class HandlerCollection implements \Iterator {
         return md5($handlerClassname.$p1.$p2.$p3);
     }
 
-    public function rewind() {
+    public function rewind(): void {
         reset($this->handlers);
     }
 
-    public function current() {
+    public function current(): mixed {
         return current($this->handlers);
     }
 
-    public function key() {
+    public function key(): mixed {
         return key($this->handlers);
     }
 
-    public function next() {
-        return next($this->handlers);
+    public function next(): void {
+        next($this->handlers);
     }
 
-    public function valid() {
+    public function valid(): bool {
         $key = key($this->handlers);
         $var = ($key !== NULL && $key !== FALSE);
         return $var;
